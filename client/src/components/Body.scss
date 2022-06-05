@@ -1,0 +1,9 @@
+.body {
+	display: flex;
+	justify-content: center;
+	padding: 16px;
+
+	@include sm {
+		padding: 42px 16px;
+	}
+}
