@@ -8,6 +8,7 @@
 		max-width: 900px;
 		min-width: 700px;
 	}
+
 	@include lg {
 		width: unset;
 		max-width: 1072px;
@@ -37,9 +38,7 @@
 		}
 
 		&--list {
-			display: flex;
-			flex-direction: column;
-			flex-wrap: wrap;
+			display: grid;
 			row-gap: 16px;
 
 			@include sm {
@@ -51,6 +50,7 @@
 			@include md {
 				display: flex;
 				flex-direction: row;
+				flex-wrap: wrap;
 				row-gap: 24px;
 				column-gap: 24px;
 			}
