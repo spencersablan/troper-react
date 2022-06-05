@@ -8,8 +8,8 @@ const BodyView = Object.freeze({
 	Student: "Student",
 });
 
-export default function Body() {
-	const [bodyState, setBodyState] = useState(BodyView.Student);
+export default function Body({ userData }) {
+	const [bodyState, setBodyState] = useState(BodyView.Home);
 
 	const BodyViewComponent = () => {
 		switch (bodyState) {

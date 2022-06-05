@@ -32,7 +32,11 @@ export default function Home() {
 				<h4 className="home--students--header">Students</h4>
 				<div className="home--students--list">
 					{students.map((student) => {
-						return <a className="home--students--student">{student.name}</a>;
+						return (
+							<a key={student.id} className="home--students--student">
+								{student.name}
+							</a>
+						);
 					})}
 				</div>
 			</div>
