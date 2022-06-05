@@ -1,0 +1,15 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-5,700;0,400;0,700&display=swap");
+
+html {
+	font-family: Inter;
+}
