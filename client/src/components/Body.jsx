@@ -14,7 +14,7 @@ export default function Body({ userData }) {
 	const BodyViewComponent = () => {
 		switch (bodyState) {
 			case BodyView.Home:
-				return <Home />;
+				return <Home userData={userData} />;
 			case BodyView.Student:
 				return <Student />;
 		}

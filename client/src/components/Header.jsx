@@ -5,7 +5,7 @@ export default function Header({ userData }) {
 	return (
 		<header className="header">
 			<h1 className="logo">.troper</h1>
-			<HeaderUser />
+			<HeaderUser userData={userData} />
 		</header>
 	);
 }
