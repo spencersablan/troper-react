@@ -1,5 +1,8 @@
 exports.getUserData = (req, res) => {
 	res.send({
-		name: "J Herbie",
+		firstName: "J",
+		lastName: "Herbie",
+		prefix: "Mr.",
+		id: 1234,
 	});
 };
