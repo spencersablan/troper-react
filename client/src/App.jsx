@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Body from "./components/Body";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
-	const [userData, setUserData] = useState({
-		firstName: "",
-		lastName: "",
-		prefix: "",
-		id: 0,
-	});
+	const [userData, setUserData] = useState(
+		localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null
+	);
+
+	// Set initial user data
+	useEffect(() => {
+		getUserData();
+	}, []);
 
 	// Get User Data
 	const getUserData = async () => {
 		try {
-			const response = await fetch("http://localhost:3001/user");
+			const response = await fetch("http://localhost:3001/user/12345");
 
 			if (!response.ok) {
 				throw new Error("Server Error");
@@ -27,16 +30,18 @@ function App() {
 		}
 	};
 
-	// Set user data
-	useEffect(() => {
-		getUserData();
-	}, []);
+	// Set user data in child
+	const externalSetUserData = (data) => {
+		setUserData(data);
+	};
 
 	return (
-		<div className="wrapper">
-			<Header userData={userData} />
-			<Body userData={userData} />
-		</div>
+		<GoogleOAuthProvider clientId="70253352156-sh3detuiinmcpqpiqglt1bmf93b585cv.apps.googleusercontent.com">
+			<div className="wrapper">
+				<Header userData={userData} />
+				<Body setUserData={externalSetUserData} userData={userData} />
+			</div>
+		</GoogleOAuthProvider>
 	);
 }
 
