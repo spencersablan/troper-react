@@ -1,30 +1,24 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Body from "./components/Body";
+import { db } from "./utils/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 function App() {
 	const [userData, setUserData] = useState({
 		firstName: "",
 		lastName: "",
 		prefix: "",
-		id: 0,
+		id: "",
 	});
+
+	const usersCollectionRef = collection(db, "users");
 
 	// Get User Data
 	const getUserData = async () => {
-		try {
-			const response = await fetch("http://localhost:3001/user");
-
-			if (!response.ok) {
-				throw new Error("Server Error");
-			}
-
-			const data = await response.json();
-
-			setUserData(data);
-		} catch (error) {
-			console.log(error);
-		}
+		const data = await getDocs(usersCollectionRef);
+		const user = data.docs.find((doc) => doc.id === "Q7EoCkXIBrrVjSHg43cb");
+		setUserData({ ...user.data(), id: "Q7EoCkXIBrrVjSHg43cb" });
 	};
 
 	// Set user data
