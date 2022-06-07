@@ -1,15 +1,21 @@
-export default function HeaderUser({ userData }) {
-	const { firstName, lastName } = userData;
+import { useAuth } from "../contexts/AuthContext";
 
-	const userFullName = `${firstName} ${lastName}`;
-	const userInitials = `${firstName.charAt(0)}${lastName.charAt(0)}`;
+export default function HeaderUser() {
+	const { currentUser } = useAuth();
 
-	return (
-		<div className="header--user">
-			<div className="header--user--circle">
-				<span className="header--user--initials">{userInitials}</span>
+	if (currentUser !== {}) {
+		// const userFullName = name || "eh";
+		// const userInitials = `${firstName.charAt(0)}${lastName.charAt(0)}`;
+
+		const profileImageStyles = {
+			backgroundImage: `url(${currentUser.photoURL})`,
+		};
+
+		return (
+			<div className="header--user">
+				<div className="header--user--circle" style={profileImageStyles}></div>
+				<h5 className="header--user--name">{currentUser.displayName}</h5>
 			</div>
-			<h5 className="header--user--name">{userFullName}</h5>
-		</div>
-	);
+		);
+	}
 }

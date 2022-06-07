@@ -21,19 +21,11 @@
 		}
 
 		&--circle {
-			display: grid;
-			place-items: center;
 			height: 32px;
 			width: 32px;
-			background-color: $ds-persian;
 			border-radius: 50%;
-		}
-
-		&--initials {
-			font-weight: 700;
-			font-size: 12px;
-			text-align: center;
-			color: $ds-white;
+			background-position: center;
+			background-size: cover;
 		}
 
 		&--name {

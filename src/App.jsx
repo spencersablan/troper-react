@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { AuthProvider } from "./contexts/AuthContext";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import { db } from "./utils/firebase";
@@ -18,6 +19,7 @@ function App() {
 	const getUserData = async () => {
 		const data = await getDocs(usersCollectionRef);
 		const user = data.docs.find((doc) => doc.id === "Q7EoCkXIBrrVjSHg43cb");
+
 		setUserData({ ...user.data(), id: "Q7EoCkXIBrrVjSHg43cb" });
 	};
 
@@ -27,10 +29,12 @@ function App() {
 	}, []);
 
 	return (
-		<div className="wrapper">
-			<Header userData={userData} />
-			<Body userData={userData} />
-		</div>
+		<AuthProvider>
+			<div className="wrapper">
+				<Header userData={userData} />
+				<Body userData={userData} />
+			</div>
+		</AuthProvider>
 	);
 }
 
