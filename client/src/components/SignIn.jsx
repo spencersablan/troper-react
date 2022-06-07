@@ -6,7 +6,9 @@ export default function SignIn({ setUserData }) {
 		console.log(result.details);
 	};
 
+	// TODO: Figure out why googleData.tokenId does not exist anymore...
 	const handleLogin = async (googleData) => {
+		console.log(googleData);
 		const response = await fetch("/google/login", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
