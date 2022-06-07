@@ -1,0 +1,10 @@
+.sign-in {
+	display: grid;
+	place-items: center;
+	row-gap: 32px;
+
+	&--header {
+		font-weight: 700;
+		font-size: 32px;
+	}
+}

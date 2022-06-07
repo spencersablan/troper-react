@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 import "./Home.scss";
 
-export default function Home({ userData }) {
+export default function Home() {
 	const [students, setStudents] = useState([
 		{
 			id: 1,
@@ -25,9 +26,11 @@ export default function Home({ userData }) {
 		},
 	]);
 
+	const { currentUser } = useAuth();
+
 	return (
 		<div className="home">
-			<h2 className="home--greeting">Hello, {`${userData.prefix} ${userData.lastName}`}</h2>
+			<h2 className="home--greeting">Hello, {currentUser.displayName}</h2>
 			<div className="home--students">
 				<h4 className="home--students--header">Students</h4>
 				<div className="home--students--list">
