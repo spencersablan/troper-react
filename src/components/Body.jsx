@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ProtectedRoute } from "./UtilProtectedRoute";
 import Home from "./Home";
 import Student from "./Student";
 import Login from "./Login";
@@ -10,8 +10,22 @@ export default function Body() {
 		<div className="body">
 			<Router>
 				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/student" element={<Student />} />
+					<Route
+						path="/"
+						element={
+							<ProtectedRoute>
+								<Home />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="/student"
+						element={
+							<ProtectedRoute>
+								<Student />
+							</ProtectedRoute>
+						}
+					/>
 					<Route path="/login" element={<Login />} />
 				</Routes>
 			</Router>

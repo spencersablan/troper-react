@@ -9,8 +9,6 @@ export default function Login() {
 
 	const googleLogin = async () => {
 		const result = await signInWithGoogle();
-
-		console.log(result.user);
 		login(result.user);
 		navigate("/");
 	};

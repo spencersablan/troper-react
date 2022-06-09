@@ -3,10 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 export default function HeaderUser() {
 	const { currentUser } = useAuth();
 
-	if (currentUser !== {}) {
-		// const userFullName = name || "eh";
-		// const userInitials = `${firstName.charAt(0)}${lastName.charAt(0)}`;
-
+	if (currentUser) {
 		const profileImageStyles = {
 			backgroundImage: `url(${currentUser.photoURL})`,
 		};
