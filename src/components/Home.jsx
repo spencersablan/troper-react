@@ -28,11 +28,18 @@ export default function Home() {
 
 	const { currentUser } = useAuth();
 
+	const addStudent = () => {};
+
 	return (
 		<div className="home">
 			<h2 className="home--greeting">Hello, {currentUser.displayName}</h2>
 			<div className="home--students">
-				<h4 className="home--students--header">Students</h4>
+				<div className="home--students--header">
+					<h4 className="home--students--title">Students</h4>
+					<span className="home--students--add" onClick={addStudent()}>
+						&#43;
+					</span>
+				</div>
 				<div className="home--students--list">
 					{students.map((student) => {
 						return (

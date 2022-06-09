@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { collection, query, where, doc, setDoc } from "firebase/firestore";
-import { db } from "../utils/firebase";
+import { setUser } from "../utils/firebase-db";
 
 const AuthContext = React.createContext();
 
@@ -12,12 +11,6 @@ export function AuthProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState({});
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-	/** Creates user in DB */
-	const setUserInDB = async () => {
-		const userRef = doc(db, "users", currentUser.uid);
-		await setDoc(userRef, { ...currentUser }, { merge: true });
-	};
-
 	// Login
 	const login = async (user) => {
 		setCurrentUser(user);
@@ -26,7 +19,7 @@ export function AuthProvider({ children }) {
 	// Watch for login & set isAuthenitcated to true
 	useEffect(() => {
 		setIsAuthenticated(true);
-		setUserInDB();
+		setUser();
 	}, [setCurrentUser]);
 
 	const value = {

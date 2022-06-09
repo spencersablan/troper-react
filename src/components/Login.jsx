@@ -1,4 +1,4 @@
-import { signInWithGoogle } from "../utils/firebase";
+import { signInWithGoogle } from "../utils/firebase-config";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import SvgGoogleIcon from "./SvgGoogleIcon";
