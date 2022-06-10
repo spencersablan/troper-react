@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { setUser } from "../utils/firebase-db";
+import { getAllUsers, setUserInDB } from "../utils/firebase-db";
 
 const AuthContext = React.createContext();
 
@@ -8,19 +8,38 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-	const [currentUser, setCurrentUser] = useState({});
+	const [currentUser, setCurrentUser] = useState({
+		displayName: "",
+		email: "",
+		photoURL: "",
+		uid: "",
+	});
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	// Login
 	const login = async (user) => {
-		setCurrentUser(user);
+		const userData = {
+			displayName: user.displayName,
+			email: user.email,
+			photoURL: user.photoURL,
+			uid: user.uid,
+		};
+
+		setCurrentUser({ ...userData });
+		getAllUsers();
+		authenticate();
 	};
 
-	// Watch for login & set isAuthenitcated to true
+	const authenticate = () => {
+		if (currentUser.uid) {
+			setIsAuthenticated(true);
+			setUserInDB(currentUser);
+		}
+	};
+
 	useEffect(() => {
-		setIsAuthenticated(true);
-		setUser();
-	}, [setCurrentUser]);
+		authenticate();
+	}, [currentUser.uid]);
 
 	const value = {
 		currentUser,
