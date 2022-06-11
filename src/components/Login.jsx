@@ -10,8 +10,10 @@ export default function Login() {
 
 	const googleLogin = async () => {
 		const result = await signInWithGoogle();
-		login(result.user);
-		navigate("/");
+		login(result.user).then(() => {
+			console.log("hey");
+			navigate("/");
+		});
 	};
 
 	return (

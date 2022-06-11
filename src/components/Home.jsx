@@ -1,30 +1,29 @@
-import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import "./Home.scss";
 
 export default function Home() {
-	const [students, setStudents] = useState([
-		{
-			id: 1,
-			name: "Khalil Mack",
-		},
-		{
-			id: 2,
-			name: "Keenan Allen",
-		},
-		{
-			id: 3,
-			name: "Joey Bosa",
-		},
-		{
-			id: 4,
-			name: "Matt Overton",
-		},
-		{
-			id: 5,
-			name: "Mike Williams",
-		},
-	]);
+	// const [students, setStudents] = useState([
+	// 	{
+	// 		id: 1,
+	// 		name: "Khalil Mack",
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		name: "Keenan Allen",
+	// 	},
+	// 	{
+	// 		id: 3,
+	// 		name: "Joey Bosa",
+	// 	},
+	// 	{
+	// 		id: 4,
+	// 		name: "Matt Overton",
+	// 	},
+	// 	{
+	// 		id: 5,
+	// 		name: "Mike Williams",
+	// 	},
+	// ]);
 
 	const { currentUser } = useAuth();
 
@@ -41,13 +40,13 @@ export default function Home() {
 					</span>
 				</div>
 				<div className="home--students--list">
-					{students.map((student) => {
+					{/* {students.map((student) => {
 						return (
 							<a key={student.id} className="home--students--student">
 								{student.name}
 							</a>
 						);
-					})}
+					})} */}
 				</div>
 			</div>
 		</div>

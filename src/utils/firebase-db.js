@@ -10,6 +10,21 @@ export const setUserInDB = async (user) => {
 	await setDoc(userRef, { ...user }, { merge: true });
 };
 
+/** Gets students of user */
+export const getStudents = async (userID) => {
+	const studentRef = collection(db, "students");
+	const studentQuery = query(studentRef, where("teacherID", "==", userID));
+	const snapshot = await getDocs(studentQuery);
+
+	let students = [];
+
+	snapshot.docs.forEach((doc) => {
+		students.push({ ...doc.data(), id: doc.id });
+	});
+
+	return students;
+};
+
 /** Creates student */
 export const newStudent = () => {};
 

@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
-import { getAllUsers, setUserInDB } from "../utils/firebase-db";
+import React, { useContext, useEffect, useState } from "react";
+import { getStudents, setUserInDB } from "../utils/firebase-db";
 
 const AuthContext = React.createContext();
 
@@ -13,26 +13,36 @@ export function AuthProvider({ children }) {
 		email: "",
 		photoURL: "",
 		uid: "",
+		students: [],
 	});
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	// Login
-	const login = async (user) => {
-		const userData = {
-			displayName: user.displayName,
-			email: user.email,
-			photoURL: user.photoURL,
-			uid: user.uid,
-		};
+	const login = (user) => {
+		return new Promise(async (resolve, reject) => {
+			const userData = {
+				displayName: user.displayName,
+				email: user.email,
+				photoURL: user.photoURL,
+				uid: user.uid,
+			};
+			setCurrentUser({ ...userData });
+			await authenticate();
 
-		setCurrentUser({ ...userData });
-		getAllUsers();
-		authenticate();
+			resolve();
+		});
 	};
 
-	const authenticate = () => {
+	const authenticate = async () => {
 		if (currentUser.uid) {
+			// Set Students
+			const students = await getStudents(currentUser.uid);
+			setCurrentUser({ ...currentUser, students });
+
+			// Authenticate
 			setIsAuthenticated(true);
+
+			// Send user data to DB
 			setUserInDB(currentUser);
 		}
 	};
